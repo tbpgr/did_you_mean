@@ -23,13 +23,11 @@ module DidYouMean
     def did_you_mean?; end
   end
 
-  @@strategies = Hash.new(NullFinder)
-
   def self.strategies
-    @@strategies
+    @@strategies ||= Hash.new(NullFinder)
   end
-end
 
-require 'did_you_mean/strategies/name_error_strategies'
-require 'did_you_mean/strategies/similar_method_finder'
-require 'did_you_mean/strategies/similar_attribute_finder'
+  require 'did_you_mean/strategies/name_error_strategies'
+  require 'did_you_mean/strategies/similar_attribute_finder'
+  require 'did_you_mean/strategies/similar_method_finder' if mri?
+end
